@@ -1,11 +1,12 @@
 package com.example.thatscringeapp.data.remote.dto
 
-data class Response(
+data class ResponseDto(
 
-    val choices: List<Choice>,
+    val choices: List<ChoiceDto>,
     val created: Int,
     val id: String,
     val model: String,
     val `object`: String,
-    val usage: Usage
+    val usage: UsageDto
 )
+
