@@ -1,7 +1,12 @@
 package com.example.thatscringeapp.data.remote.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class Usage(
-    val completion_tokens: Int,
-    val prompt_tokens: Int,
-    val total_tokens: Int
+    @SerializedName("completion_tokens")
+    val completionTokens: Int,
+    @SerializedName("prompt_tokens")
+    val promptTokens: Int,
+    @SerializedName("total_tokens")
+    val totalTokens: Int
 )

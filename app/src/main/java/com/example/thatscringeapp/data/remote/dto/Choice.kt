@@ -1,8 +1,12 @@
 package com.example.thatscringeapp.data.remote.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class Choice(
-    val finish_reason: String,
+    @SerializedName("finish_reason")
+    val finishReason: String,
     val index: Int,
-    val logprobs: Boolean? = null,
+    @SerializedName("logprobs")
+    val logProbs: Boolean?,
     val text: String
 )
