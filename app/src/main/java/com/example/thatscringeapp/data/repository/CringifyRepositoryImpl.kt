@@ -15,14 +15,14 @@ class CringifyRepositoryImpl @Inject constructor(
     private val api: OpenAiService
 ) : CringifyRepository {
 
-    override suspend fun getCringed(): Flow<Resource<String>> = flow {
+    override suspend fun getCringed(prompt: String): Flow<Resource<String>> = flow {
         emit(Resource.Loading())
 
         try {
             val apiKey = BuildConfig.API_KEY
             val requestBody = RequestBody(
                 model = "text-davinci-003",
-                prompt = "Say this is a test",
+                prompt = "Create a cringy motivational quote based on the following topic.\n ${prompt.toString()}\n Cringy motivational quote:",
                 maxTokens = 20,
                 temperature = 0.5f
             )

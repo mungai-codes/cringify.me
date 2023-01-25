@@ -4,5 +4,5 @@ import com.example.thatscringeapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface CringifyRepository {
-    suspend fun getCringed(): Flow<Resource<String>>
+    suspend fun getCringed(prompt: String): Flow<Resource<String>>
 }

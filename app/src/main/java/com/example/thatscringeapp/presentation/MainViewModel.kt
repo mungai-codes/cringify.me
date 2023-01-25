@@ -10,6 +10,7 @@ import com.example.thatscringeapp.util.Resource
 import com.example.thatscringeapp.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,20 +22,18 @@ class MainViewModel @Inject constructor(
     private val repo: CringifyRepository
 ) : ViewModel() {
 
-    val openAi by lazy {
-
-    }
-
     private val _uiState = MutableStateFlow(UiState())
     val uiState = _uiState.asStateFlow()
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
+    private var searchJob: Job? = null
     fun cringe() {
-
-        viewModelScope.launch {
-            repo.getCringed().onEach { result ->
+        val prompt = _uiState.value.prompt
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            repo.getCringed(prompt = prompt).onEach { result ->
                 when (result) {
                     is Resource.Loading -> {
                         _uiState.update {
@@ -65,14 +64,13 @@ class MainViewModel @Inject constructor(
                         )
                     }
                 }
-
             }.launchIn(this)
         }
-
     }
 
-    fun moreCringe() {
-
+    fun onPromptChanged(input: String) {
+        _uiState.update {
+            it.copy(prompt = input)
+        }
     }
-
 }
