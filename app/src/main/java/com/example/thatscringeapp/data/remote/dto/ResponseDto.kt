@@ -1,7 +1,9 @@
 package com.example.thatscringeapp.data.remote.dto
 
-data class ResponseDto(
+import androidx.annotation.Keep
 
+@Keep
+data class ResponseDto(
     val choices: List<ChoiceDto>,
     val created: Int,
     val id: String,

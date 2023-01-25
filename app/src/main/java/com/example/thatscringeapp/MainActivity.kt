@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.os.BuildCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.thatscringeapp.presentation.HomeScreen
+import com.example.thatscringeapp.presentation.MainViewModel
 import com.example.thatscringeapp.ui.theme.ThatsCringeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,8 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ThatsCringeAppTheme {
 
-             //   val apiKey = BuildConfig.API_KEY
-
+                HomeScreen()
             }
         }
     }

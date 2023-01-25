@@ -1,12 +1,11 @@
 package com.example.thatscringeapp.data.remote.dto
 
-import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
 
+@Keep
 data class ChoiceDto(
-    @SerializedName("finish_reason")
-    val finishReason: String,
+    val finish_reason: String,
     val index: Int,
-    @SerializedName("logprobs")
-    val logProbs: Boolean?,
+    val logprobs: Boolean?,
     val text: String
 )
