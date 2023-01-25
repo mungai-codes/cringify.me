@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val api: OpenAiService,
     private val repo: CringifyRepository
 ) : ViewModel() {
 
@@ -37,14 +36,18 @@ class MainViewModel @Inject constructor(
                 when (result) {
                     is Resource.Loading -> {
                         _uiState.update {
-                            it.copy(isLoading = true)
+                            it.copy(
+                                isLoading = true,
+                                visible = false
+                            )
                         }
                     }
                     is Resource.Success -> {
                         _uiState.update {
                             it.copy(
                                 quote = result.data ?: "",
-                                isLoading = false
+                                isLoading = false,
+                                visible = true
                             )
                         }
                         _eventFlow.emit(
@@ -54,7 +57,8 @@ class MainViewModel @Inject constructor(
                     is Resource.Error -> {
                         _uiState.update {
                             it.copy(
-                                isLoading = false
+                                isLoading = false,
+                                visible = false
                             )
                         }
                         _eventFlow.emit(
